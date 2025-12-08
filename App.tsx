@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from './components/Navigation';
+import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import Maintenance from './components/Maintenance';
 import Mortgage from './components/Mortgage';
@@ -8,6 +9,7 @@ import Rental from './components/Rental';
 import Selling from './components/Selling';
 import AiAdvisor from './components/AiAdvisor';
 import { ViewState, HomeProfile } from './types';
+import { Menu, Bell } from 'lucide-react';
 
 // Mock User Data
 const myHome: HomeProfile = {
@@ -19,7 +21,7 @@ const myHome: HomeProfile = {
   beds: 3,
   baths: 2.5,
   yearBuilt: 2005,
-  image: "https://picsum.photos/800/600"
+  image: "https://picsum.photos/id/15/1200/800"
 };
 
 const App: React.FC = () => {
@@ -47,25 +49,59 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-900 pb-20">
-      {/* Top Bar */}
-      <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-40 px-4 py-3 border-b border-gray-100 flex justify-between items-center shadow-sm">
-        <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">H</div>
-            <span className="font-bold text-lg tracking-tight text-gray-900">HomeHub</span>
+    <div className="flex min-h-screen bg-gray-50 font-sans text-gray-900">
+      {/* Desktop Sidebar */}
+      <Sidebar 
+        currentView={currentView} 
+        onNavigate={setCurrentView} 
+        className="hidden md:flex" 
+      />
+
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Mobile Header */}
+        <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-40 px-4 py-3 border-b border-gray-100 flex justify-between items-center shadow-sm md:hidden">
+          <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">H</div>
+              <span className="font-bold text-lg tracking-tight text-gray-900">HomeHub</span>
+          </div>
+          <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
+               <img src="https://picsum.photos/100" alt="User" />
+          </div>
         </div>
-        <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
-             <img src="https://picsum.photos/100" alt="User" />
+
+        {/* Desktop Header */}
+        <div className="hidden md:flex items-center justify-between px-8 py-4 bg-white border-b border-gray-100 sticky top-0 z-30">
+          <h1 className="text-xl font-bold text-gray-800 capitalize">
+            {currentView.replace(/_/g, ' ')}
+          </h1>
+          <div className="flex items-center gap-4">
+             <button className="p-2 text-gray-400 hover:bg-gray-100 rounded-full transition-colors relative">
+                <Bell size={20} />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+             </button>
+             <div className="h-8 w-px bg-gray-200 mx-1"></div>
+             <div className="flex items-center gap-2">
+                <div className="text-right hidden lg:block">
+                  <p className="text-sm font-semibold text-gray-900 leading-none">Qichao Wang</p>
+                  <p className="text-xs text-gray-500 leading-none mt-1">Austin, TX</p>
+                </div>
+                <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden border border-gray-100 shadow-sm cursor-pointer">
+                  <img src="https://picsum.photos/100" alt="User" />
+                </div>
+             </div>
+          </div>
         </div>
+
+        {/* Main Content Area */}
+        <main className="flex-1 p-4 pb-24 md:p-8 md:pb-8 overflow-y-auto overflow-x-hidden">
+          <div className="max-w-7xl mx-auto w-full">
+            {renderView()}
+          </div>
+        </main>
+
+        {/* Mobile Navigation */}
+        <Navigation currentView={currentView} onNavigate={setCurrentView} />
       </div>
-
-      {/* Main Content Area */}
-      <main className="max-w-2xl mx-auto p-4 pt-6">
-        {renderView()}
-      </main>
-
-      {/* Navigation */}
-      <Navigation currentView={currentView} onNavigate={setCurrentView} />
     </div>
   );
 };
