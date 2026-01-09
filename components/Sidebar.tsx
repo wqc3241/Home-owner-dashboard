@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ViewState } from '../types';
 import { LayoutDashboard, Hammer, Banknote, PaintBucket, TrendingUp, DollarSign, Bot, LogOut } from 'lucide-react';
@@ -18,6 +19,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate, className = 
     { id: ViewState.SELLING, icon: TrendingUp, label: 'Selling Guide' },
     { id: ViewState.AI_ADVISOR, icon: Bot, label: 'AI Advisor' },
   ];
+
+  // Using the same consistent avatar for the user
+  const userAvatar = "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AceDay&backgroundColor=b6e3f4";
 
   return (
     <div className={`w-64 bg-white border-r border-gray-200 h-screen flex-col flex-shrink-0 sticky top-0 ${className}`}>
@@ -54,9 +58,9 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate, className = 
 
       {/* User Profile / Footer */}
       <div className="p-4 border-t border-gray-100">
-        <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden shadow-inner">
-                <img src="https://picsum.photos/100" alt="User" className="w-full h-full object-cover" />
+        <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer group">
+            <div className="w-10 h-10 rounded-full bg-gray-100 overflow-hidden shadow-inner border border-gray-100 group-hover:border-brand-200 transition-colors">
+                <img src={userAvatar} alt="User" className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-gray-900 truncate">Qichao Wang</p>

@@ -28,6 +28,9 @@ const myHome: HomeProfile = {
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>(ViewState.DASHBOARD);
 
+  // Using a consistent unique avatar to represent the 'Ace Day' figurine provided by the user
+  const userAvatar = "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AceDay&backgroundColor=b6e3f4";
+
   const renderView = () => {
     switch (currentView) {
       case ViewState.DASHBOARD:
@@ -65,8 +68,8 @@ const App: React.FC = () => {
               <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">H</div>
               <span className="font-bold text-lg tracking-tight text-gray-900">HomeHub</span>
           </div>
-          <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
-               <img src="https://picsum.photos/100" alt="User" />
+          <div className="w-8 h-8 rounded-full bg-gray-100 overflow-hidden border border-gray-200">
+               <img src={userAvatar} alt="User" className="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -86,8 +89,8 @@ const App: React.FC = () => {
                   <p className="text-sm font-semibold text-gray-900 leading-none">Qichao Wang</p>
                   <p className="text-xs text-gray-500 leading-none mt-1">Austin, TX</p>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden border border-gray-100 shadow-sm cursor-pointer">
-                  <img src="https://picsum.photos/100" alt="User" />
+                <div className="w-10 h-10 rounded-full bg-gray-100 overflow-hidden border border-gray-100 shadow-sm cursor-pointer transition-transform hover:scale-105 active:scale-95">
+                  <img src={userAvatar} alt="User" className="w-full h-full object-cover" />
                 </div>
              </div>
           </div>
