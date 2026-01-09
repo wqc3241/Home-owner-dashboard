@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navigation from './components/Navigation';
 import Sidebar from './components/Sidebar';
@@ -21,7 +22,7 @@ const myHome: HomeProfile = {
   beds: 3,
   baths: 2.5,
   yearBuilt: 2005,
-  image: "https://picsum.photos/id/15/1200/800"
+  image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&q=80&w=1200"
 };
 
 const App: React.FC = () => {
